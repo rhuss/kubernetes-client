@@ -15,6 +15,17 @@
  */
 package io.fabric8.openshift.client.dsl.internal;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
+
 import io.fabric8.kubernetes.client.KubernetesClientException;
 import io.fabric8.kubernetes.client.Watch;
 import io.fabric8.kubernetes.client.Watcher;
@@ -52,22 +63,11 @@ import okio.BufferedSink;
 import okio.Okio;
 import okio.Source;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.concurrent.TimeUnit;
-
 import static io.fabric8.openshift.client.OpenShiftAPIGroups.BUILD;
 
 public class BuildConfigOperationsImpl extends OpenShiftOperation<BuildConfig, BuildConfigList, DoneableBuildConfig,
-  BuildConfigResource<BuildConfig, DoneableBuildConfig, Void, Build>>
-        implements BuildConfigOperation {
+    BuildConfigResource<BuildConfig, DoneableBuildConfig, Void, Build>>
+    implements BuildConfigOperation {
 
   public static final String BUILD_CONFIG_LABEL = "openshift.io/build-config.name";
   public static final String BUILD_CONFIG_ANNOTATION = "openshift.io/build-config.name";
